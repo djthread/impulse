@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# Stops all our docker containers. Works with `dev` or `db` scripts.
+#
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+docker-compose \
+    -p impulse_dev \
+    -f "$DIR/../assets/ops/dev/docker-compose.yml" \
+    down

@@ -1,0 +1,53 @@
+version: '3.2'
+
+services:
+  db:
+    container_name: impulse_dev_db
+    restart: always
+    image: postgres
+    volumes: [ "impulse_dev_db:/var/lib/postgresql/data" ]
+    ports: [ "5434:5432" ]
+    environment:
+      POSTGRES_PASSWORD: verysecure123
+    networks:
+      - lnet
+
+  node:
+    container_name: impulse_node
+    restart: always
+    image: node:12
+    stdin_open: true
+    tty: true
+    volumes:
+      - node_bin:/usr/local/bin
+      - node_modules:/usr/local/lib/node_modules
+    networks:
+      - lnet
+
+  app:
+    container_name: impulse_dev
+    restart: always
+    build:
+      context: ..
+      dockerfile: dev/Dockerfile
+    tty: true
+    stdin_open: true
+    depends_on: [ db ]
+    volumes:
+      - '../../..:/app'
+      - node_bin:/usr/local/njs
+      - node_modules:/usr/local/lib/node_modules
+    ports: [ "9900:8800" ]
+    environment:
+      PG_HOST: db
+      PATH: /usr/local/njs:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    networks:
+      - lnet
+
+volumes:
+  node_bin:
+  node_modules:
+  impulse_dev_db:
+
+networks:
+  lnet:

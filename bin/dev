@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+#
+# Impulse docker-based dev environment starter
+#
+#   1. Write secret files if they don't already exist
+#   2. docker-compose up -d (runs postgres and elixir containers)
+#   3. Run fish, a friendly shell
+#
+# Note that if you have Elixir installed to your system, you may like to run
+# only postgres as a container. In this case, `db` can be used instead of
+# this script. (`down` will still work.)
+#
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+if [ "$1" == "--ql" ]; then
+    export QL_MODE=1
+    ARGS="${@:2}"
+else
+    ARGS="$@"
+fi
+
+if "$DIR/maybe_create_secret_files"; then
+    cat << EOF
+Elixir development environment initialized!
+
+To install dependencies and set up the database, run the following commanads:
+
+    mix deps.get
+    cd assets; npm install; cd ..
+    mix ecto.setup
+
+(Or execute these commands with the shortcut - \`setup\`)
+
+EOF
+fi
+
+docker-compose \
+    -p impulse_dev \
+    -f "$DIR/../assets/ops/dev/docker-compose.yml" \
+    up $ARGS -d && \
+  docker exec -it impulse_dev fish

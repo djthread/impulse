@@ -17,6 +17,11 @@ config :impulse, ImpulseWeb.Endpoint,
   render_errors: [view: ImpulseWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Impulse.PubSub, adapter: Phoenix.PubSub.PG2]
 
+config :impulse, Impulse.Endpoint,
+  live_view: [
+    signing_salt: "IFoa+oZfdsVcf5PzPGzk3RIX13RKdXfe"
+  ]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

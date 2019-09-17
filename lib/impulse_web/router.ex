@@ -13,6 +13,7 @@ defmodule ImpulseWeb.Router do
   scope "/", ImpulseWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", HomeLive
+    live "/shows", ShowsLive
   end
 end

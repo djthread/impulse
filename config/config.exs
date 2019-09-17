@@ -17,7 +17,7 @@ config :impulse, ImpulseWeb.Endpoint,
   render_errors: [view: ImpulseWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Impulse.PubSub, adapter: Phoenix.PubSub.PG2]
 
-config :impulse, Impulse.Endpoint,
+config :impulse, ImpulseWeb.Endpoint,
   live_view: [
     signing_salt: "IFoa+oZfdsVcf5PzPGzk3RIX13RKdXfe"
   ]

@@ -11,16 +11,21 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//vjs.zencdn.net/7.1.0/video-js.css" rel="stylesheet">
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/cyborg/bulmaswatch.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/darkly/bulmaswatch.min.css">
     <link rel="icon" type="image/gif" href="/images/favicon.gif" />
   </head>
   <body>
     <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li><%= live_link "Home", to: "/" %></li>
-            <li><%= live_link "Shows", to: "/shows" %></li>
+      <section>
+        <nav role="navigation" class="navbar is-primary" aria-label="main navigation">
+          <%= live_link class: "navbar-brand",
+                to: Routes.live_path(Endpoint, HomeLive) do %>
+            <span class="idi">I</span>mpulse Detroit
+          <% end %>
+          <div class="navbar-start">
+            <%= live_link "Shows",
+              class: "navbar-item",
+              to: Routes.live_path(Endpoint, ShowsLive) %>
           </ul>
         </nav>
       </section>

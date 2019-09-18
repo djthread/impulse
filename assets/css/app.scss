@@ -3,3 +3,8 @@
 @import "bulma/bulma.sass";
 
 @import "../../deps/phoenix_live_view/assets/css/live_view.css";
+
+@font-face { font-family: desonanz; src: url(/ttf/desonanz.ttf); }
+
+.idi { text-transform: lowercase; }
+.navbar-brand { font-family: desonanz; font-size: x-large; color: #f63; }

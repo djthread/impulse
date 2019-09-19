@@ -1,0 +1,33 @@
+<h1 class="title">Create User</h1>
+
+<%= f = form_for @changeset, "#", [phx_change: :validate, phx_submit: :save, phx_hook: "SavedForm"] %>
+  <div class="field">
+    <%= label f, :name, "Username (and URL part)", class: "label" %>
+    <div class="control">
+      <%= text_input f, :name, class: "input" %>
+    </div>
+    <%= error_tag f, :name %>
+  </div>
+
+  <%= submit "Create User", phx_disable_with: "Saving..." %>
+</form>
+
+<%= case assigns[:feedback] do %>
+  <% {:preexisting, link, %{name: name, inserted_at: inserted_at}} -> %>
+    <div class="notification is-link">
+      <p><%= name %> already exists, so the invite link has been regenerated.
+         (User originally created on <%=
+         Impulse.display_datetime(inserted_at) %>.)</p>
+      <p>They can reset their password and get started at:</p>
+      <p><a href="<%= link %>"><%= link %></a></p>
+    </div>
+
+  <% {:created, link, %{name: name}} -> %>
+    <div class="notification is-info">
+      <p>The user account <%= name %> has been created.</p>
+      <p>They can reset their password and get started at:</p>
+      <p><a href="<%= link %>"><%= link %></a></p>
+    </div>
+
+  <% _ -> %>
+<% end %>

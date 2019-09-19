@@ -20,15 +20,19 @@ config :impulse, ImpulseWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: [
-    node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch-stdin",
-      cd: Path.expand("../assets", __DIR__)
-    ]
-  ]
+  watchers:
+    if(System.get_env("NO_WEBPACK_WATCH"),
+      do: [
+        node: [
+          "node_modules/webpack/bin/webpack.js",
+          "--mode",
+          "development",
+          "--watch-stdin",
+          cd: Path.expand("../assets", __DIR__)
+        ]
+      ],
+      else: []
+    )
 
 # ## SSL Support
 #

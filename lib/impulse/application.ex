@@ -4,6 +4,7 @@ defmodule Impulse.Application do
   @moduledoc false
 
   use Application
+  alias Impulse.Account
 
   def start(_type, _args) do
     # List all child processes to be supervised

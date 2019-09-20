@@ -1,4 +1,5 @@
 defmodule Impulse.ChatEntry do
+  @moduledoc "ChatEntry schema"
   use Ecto.Schema
   import Ecto.Changeset
 

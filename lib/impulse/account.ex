@@ -121,11 +121,6 @@ defmodule Impulse.Account do
   end
 
   def stamp_expired?(stamp, now) do
-    minutes_old = (now - stamp) / 60
-
-    cond do
-      minutes_old > @expire_minutes -> true
-      true -> false
-    end
+    (now - stamp) / 60 > @expire_minutes
   end
 end

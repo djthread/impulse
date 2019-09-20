@@ -1,4 +1,5 @@
 defmodule Impulse.Profile do
+  @moduledoc "Profile schema"
   use Ecto.Schema
   import Ecto.Changeset
   alias Impulse.{Account, User}

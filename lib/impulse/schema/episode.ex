@@ -1,4 +1,5 @@
 defmodule Impulse.Episode do
+  @moduledoc "Episode schema"
   use Ecto.Schema
   import Ecto.Changeset
 

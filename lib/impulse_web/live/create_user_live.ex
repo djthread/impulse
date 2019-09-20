@@ -1,4 +1,9 @@
 defmodule ImpulseWeb.CreateUserLive do
+  @moduledoc """
+  LiveView for the create user screen
+
+  This screen will be used by admins to create invite links
+  """
   use Phoenix.LiveView
   alias ImpulseWeb.{Endpoint, UserView}
   alias Impulse.{Account, User}

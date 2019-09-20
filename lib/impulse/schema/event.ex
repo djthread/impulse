@@ -1,4 +1,5 @@
 defmodule Impulse.Event do
+  @moduledoc "Event schema"
   use Ecto.Schema
   import Ecto.Changeset
 

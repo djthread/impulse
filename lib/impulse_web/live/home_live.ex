@@ -1,4 +1,5 @@
 defmodule ImpulseWeb.HomeLive do
+  @moduledoc "LiveView for the home page"
   use Phoenix.LiveView
   alias ImpulseWeb.HomeView
 

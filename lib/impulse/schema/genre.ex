@@ -1,4 +1,5 @@
 defmodule Impulse.Genre do
+  @moduledoc "Genre schema"
   use Ecto.Schema
 
   schema "genres" do

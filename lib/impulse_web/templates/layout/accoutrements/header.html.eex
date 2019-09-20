@@ -1,0 +1,15 @@
+<header>
+  <section>
+    <nav role="navigation" class="navbar is-primary" aria-label="main navigation">
+      <%= live_link class: "navbar-brand",
+            to: Routes.live_path(Endpoint, HomeLive) do %>
+        <span class="idi">I</span>mpulse Detroit
+      <% end %>
+      <div class="navbar-start">
+        <%= live_link "Shows",
+          class: "navbar-item",
+          to: Routes.live_path(Endpoint, ShowsLive) %>
+      </ul>
+    </nav>
+  </section>
+</header>

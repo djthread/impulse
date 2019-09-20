@@ -6,5 +6,15 @@
 
 @font-face { font-family: desonanz; src: url(/ttf/desonanz.ttf); }
 
+section.hero div.hero-body {
+  background-size: cover;
+  background-position: center center;
+  // clear: both;
+  height: 50vh;
+  // border-bottom: 3px solid $primary-color;
+  // background-image: url(https://photos.impulsedetroit.net/action.php?id=182&part=e);
+  background-image: url(https://photos.impulsedetroit.net/i/upload/2017/02/17/20170217190201-04823ba2-xl.jpg);
+}
+
 .idi { text-transform: lowercase; }
 .navbar-brand { font-family: desonanz; font-size: x-large; color: #f63; }

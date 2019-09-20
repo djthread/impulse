@@ -21,7 +21,7 @@ config :impulse, ImpulseWeb.Endpoint,
   code_reloader: true,
   check_origin: false,
   watchers:
-    if(System.get_env("NO_WEBPACK_WATCH"),
+    unless(System.get_env("NO_WEBPACK_WATCH"),
       do: [
         node: [
           "node_modules/webpack/bin/webpack.js",

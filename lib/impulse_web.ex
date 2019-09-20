@@ -32,7 +32,8 @@ defmodule ImpulseWeb do
     quote do
       use Phoenix.View,
         root: "lib/impulse_web/templates",
-        namespace: ImpulseWeb
+        namespace: ImpulseWeb,
+        pattern: "**/*"
 
       # Import convenience functions from controllers
       import Phoenix.Controller,

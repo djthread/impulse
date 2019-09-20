@@ -1,7 +1,7 @@
 defmodule ImpulseWeb.ShowsLive do
   @moduledoc "The LiveView for the shows listing"
   use Phoenix.LiveView
-  # alias ImpulseWeb.{Endpoint, ShowsView}
+  alias ImpulseWeb.ShowsView
   # alias ImpulseWeb.Router.Helpers, as: Routes
 
   def render(assigns) do

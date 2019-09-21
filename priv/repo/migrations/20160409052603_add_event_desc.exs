@@ -1,4 +1,4 @@
-defmodule Tuesday.Repo.Migrations.AddEventDesc do
+defmodule Impulse.Repo.Migrations.AddEventDesc do
   use Ecto.Migration
 
   def change do

@@ -1,4 +1,4 @@
-defmodule Tuesday.Repo.Migrations.AddTableEvents do
+defmodule Impulse.Repo.Migrations.AddTableEvents do
   use Ecto.Migration
 
   def change do

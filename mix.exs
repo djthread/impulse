@@ -45,6 +45,7 @@ defmodule Impulse.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:phoenix_live_view, "~> 0.1.0"},
       {:timex, "~> 3.0"},
+      {:earmark, "~> 1.4.0"},
       {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
     ]
   end

@@ -1,4 +1,4 @@
-defmodule Tuesday.Repo.Migrations.Initial do
+defmodule Impulse.Repo.Migrations.Initial do
   use Ecto.Migration
 
   def change do

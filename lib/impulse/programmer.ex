@@ -5,6 +5,32 @@ defmodule Impulse.Programmer do
   import Ecto.Query
   alias Impulse.{Episode, Event, Repo}
 
+  def episodes_and_events do
+    episodes =
+      Repo.all(
+        from(ep in Episode,
+          join: sh in assoc(ep, :show),
+          select: {ep, sh.name, sh.slug},
+          order_by: [desc: ep.record_date],
+          limit: 10
+        )
+      )
+      |> IO.inspect()
+
+    {episodes, []}
+
+    # events =
+    #   Repo.all(
+    #     from(ev in Event,
+    #       order_by: [desc: ev.happens_on],
+    #       limit: 10
+    #     )
+    #   )
+
+    # {episodes, events}
+    # |> IO.inspect()
+  end
+
   def preload_a_month_of_episodes_and_events(shows) do
     shows
     |> Repo.preload(
@@ -56,5 +82,4 @@ defmodule Impulse.Programmer do
   #   # |> put_assoc(:users, [user])
   #   # |> Tuesday.Repo.insert!
   # end
-
 end

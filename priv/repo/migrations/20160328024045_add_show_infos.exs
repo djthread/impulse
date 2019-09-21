@@ -1,4 +1,4 @@
-defmodule Tuesday.Repo.Migrations.AddShowInfos do
+defmodule Impulse.Repo.Migrations.AddShowInfos do
   use Ecto.Migration
 
   def change do

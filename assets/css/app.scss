@@ -18,3 +18,23 @@ section.hero div.hero-body {
 
 .idi { text-transform: lowercase; }
 .navbar-brand { font-family: desonanz; font-size: x-large; color: #f63; }
+
+.episode-list {
+  h3 { float: left; }
+
+  .content { clear: both; }
+
+  .showname {
+    text-align: right;
+    padding: 0 .5rem;
+    color: #ccc;
+    font-size: 70%;
+    line-height: 1.2em;
+    float: right;
+  }
+  .showname p {
+    font-size: 120%;
+    font-weight: 700;
+    margin: 0;
+  }
+}

@@ -15,8 +15,8 @@ defmodule Impulse.Episode do
     field :filename, :string
     field :description, :string
 
-    belongs_to :user, Tuesday.User
-    belongs_to :show, Tuesday.Show
+    belongs_to :user, Impulse.User
+    belongs_to :show, Impulse.Show
 
     timestamps()
   end

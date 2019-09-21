@@ -4,6 +4,11 @@
 
 @import "../../deps/phoenix_live_view/assets/css/live_view.css";
 
+$fa-font-path: "../node_modules/@fortawesome/fontawesome-free/webfonts";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
+// @import "../node_modules/@fortawesome/fontawesome-free/scss/solid";
+// @import "../node_modules/@fortawesome/fontawesome-free/scss/brands";
+
 @font-face { font-family: desonanz; src: url(/ttf/desonanz.ttf); }
 
 section.hero div.hero-body {
@@ -37,4 +42,6 @@ section.hero div.hero-body {
     font-weight: 700;
     margin: 0;
   }
+
+  .button { width: 40%; }
 }

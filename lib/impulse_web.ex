@@ -47,7 +47,7 @@ defmodule ImpulseWeb do
 
       import ImpulseWeb.ErrorHelpers
       import ImpulseWeb.Gettext
-      import ImpulseWeb.ViewHelpers
+      import ImpulseWeb.ViewHelper
       alias ImpulseWeb.Router.Helpers, as: Routes
       alias ImpulseWeb.{Endpoint, HomeLive, ShowsLive}
     end

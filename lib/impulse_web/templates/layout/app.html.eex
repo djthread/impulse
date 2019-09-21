@@ -8,7 +8,6 @@
     <meta name="author" content="Impulse Detroit">
     <title>Impulse Detroit</title>
     <link href="//fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet" type="text/css">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//vjs.zencdn.net/7.1.0/video-js.css" rel="stylesheet">
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/slate/bulmaswatch.min.css">

@@ -1,14 +1,14 @@
 <%= LayoutView.render_layout "normal.html", assigns do %>
-<%= render(
-  ImpulseWeb.LayoutView,
-  "accoutrements/breadcrumbs.html",
-  breadcrumbs: [
-    {"Shows", Routes.live_path(Endpoint, ShowsLive)}
-  ]) %>
-<%= for show <- @shows do %>
-  <%= live_link to: Routes.live_path(Endpoint, ShowLive, show.slug), class: "box" do %>
-    <h2 class="title"><%= show.name %></h2>
-    <%= markdown(show.tiny_info) %>
+  <%= render(
+    ImpulseWeb.LayoutView,
+    "accoutrements/breadcrumbs.html",
+    breadcrumbs: [
+      {"Shows", Routes.live_path(Endpoint, ShowsLive)}
+    ]) %>
+  <%= for show <- @shows do %>
+    <%= live_link to: Routes.live_path(Endpoint, ShowLive, show.slug), class: "box" do %>
+      <h2 class="title"><%= show.name %></h2>
+      <%= markdown(show.tiny_info) %>
+    <% end %>
   <% end %>
-<% end %>
 <% end %>

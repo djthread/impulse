@@ -1,0 +1,1 @@
+<%= markdown(@show.full_info) %>

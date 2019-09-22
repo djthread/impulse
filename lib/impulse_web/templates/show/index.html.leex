@@ -1,16 +1,22 @@
-<%= render(
-  ImpulseWeb.LayoutView,
-  "accoutrements/breadcrumbs.html",
-  breadcrumbs: [
-    {"Shows", Routes.live_path(Endpoint, ShowsLive)},
-    {@show.name, Routes.live_path(Endpoint, ShowLive, @show.slug)}
-  ]) %>
-<div class="tabs">
-  <ul>
-    <li class="is-active"><a>Pictures</a></li>
-    <li><a>Music</a></li>
-    <li><a>Videos</a></li>
-    <li><a>Documents</a></li>
-  </ul>
-</div>
-<%= inspect @show %>
+<%= LayoutView.render_layout "normal.html", assigns do %>
+  <%= render(
+    ImpulseWeb.LayoutView,
+    "accoutrements/breadcrumbs.html",
+    breadcrumbs: [
+      {"Shows", Routes.live_path(Endpoint, ShowsLive)},
+      {@show.name, Routes.live_path(Endpoint, ShowLive, @show.slug)}
+    ]) %>
+  <div class="tabs">
+    <ul>
+      <%= for {name, display, url} <- @sections do %>
+      <li<%= if name == @section, do: raw ~s/ class="is-active"/ %>>
+        <%= live_link display, to: url %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="content">
+    <%= render("#{@section}.html", assigns) %>
+  </div>
+  <%= inspect @show %>
+<% end %>

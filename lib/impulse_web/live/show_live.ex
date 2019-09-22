@@ -2,7 +2,7 @@ defmodule ImpulseWeb.ShowLive do
   @moduledoc "The LiveView for a show page"
   use Phoenix.LiveView
   alias Impulse.Programmer
-  alias ImpulseWeb.{HomeLive, ShowView}
+  alias ImpulseWeb.{Endpoint, HomeLive, ShowLive, ShowView}
   alias ImpulseWeb.Router.Helpers, as: Routes
 
   def render(assigns) do
@@ -19,10 +19,41 @@ defmodule ImpulseWeb.ShowLive do
         {:stop,
          socket
          |> put_flash(:error, "That show does not exist!")
-         |> redirect(to: Routes.live_path(socket, HomeLive))}
+         |> live_redirect(to: Routes.live_path(socket, HomeLive))}
 
       show ->
-        {:noreply, assign(socket, :show, show)}
+        sections = sections(show.slug)
+
+        cond do
+          Enum.any?(sections, fn {n, _, _} -> n == path_params["section"] end) ->
+            {:noreply,
+             assign(socket,
+               show: show,
+               section: path_params["section"],
+               sections: sections
+             )}
+
+          path_params["section"] ->
+            {:stop,
+             socket
+             |> put_flash(:error, "No such section!")
+             |> live_redirect(to: Routes.live_path(socket, ShowLive, show.slug))}
+
+          true ->
+            {:noreply,
+             assign(socket, show: show, section: "home", sections: sections)}
+        end
     end
+  end
+
+  defp sections(slug) do
+    [
+      {"home", "Home", Routes.live_path(Endpoint, ShowLive, slug)},
+      {"episodes", "Episodes",
+       Routes.live_path(Endpoint, ShowLive, slug, "episodes")},
+      {"events", "Events",
+       Routes.live_path(Endpoint, ShowLive, slug, "events")},
+      {"info", "Info", Routes.live_path(Endpoint, ShowLive, slug, "info")}
+    ]
   end
 end

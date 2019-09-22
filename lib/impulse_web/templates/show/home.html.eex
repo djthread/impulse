@@ -1,1 +1,3 @@
 <%= markdown(@show.short_info) %>
+<%= render(PartsView, "events_episodes.html",
+      events: @events, episodes: @episodes) %>

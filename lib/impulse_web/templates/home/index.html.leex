@@ -5,76 +5,7 @@
 </section>
 <section class="container content">
   <p>What is up?</p>
-  <div class="columns">
-    <div class="column event-list">
-      <h2 class="title">Upcoming Events</h2>
-      <%= for {event, show_title, _show_slug} <- @events do %>
-        <div class="box">
-          <div class="media-content">
-            <h3 class="title"><%= event.title %></h3>
-            <div class="meta">
-              <div class="showname"><%= show_title %></div>
-              <div class="eventdate"><%= date_format(event.happens_on) %></div>
-            </div>
-          </div>
-          <div class="content">
-            <%= if event.description, do: markdown(event.description) %>
-            <% lines = event.info_json["lines"] %>
-            <%= if lines do %>
-              <ul class="settimes">
-              <%= for line <- event.info_json["lines"] do %>
-                <li>
-                  <% bits =
-                      [line["genres"], line["affiliations"], line["extra"]]
-                      |> Enum.reject(fn x -> x in [nil, ""] end) %>
-                  <%= line["time"] %> <%= line["artist"] %>
-                  <%= unless [] == bits do %>
-                    (<%= Enum.join(bits, ", ") %>)
-                  <% end %>
-                </li>
-              <% end %>
-              </ul>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    <div class="column episode-list">
-      <h2 class="title">Recent Episodes</h2>
-      <%= for {episode, show_title, show_slug} <- @episodes do %>
-        <div class="box">
-          <div class="media-content">
-            <h3 class="title"><%= episode.title %></h3>
-            <div class="meta">
-              <div class="showname"><%= show_title %></div>
-            </div>
-          </div>
-          <div class="content">
-            <%= markdown(episode.description) %>
-
-            <div class="columns">
-              <div class="column buttons">
-                <span class="button is-fullwidth">
-                  <%= fas("play-circle") %> Listen
-                </span>
-              </div>
-              <div class="column buttons">
-                <% dl = "/download/#{show_slug}/#{episode.filename}" %>
-                <a href="<%= dl %>" class="button is-fullwidth">
-                  <%= fas("download") %> Download
-                </a>
-              </div>
-            </div>
-
-            <p>
-              Recorded on <%= date_format(episode.record_date) %>.
-              Posted on <%= date_format(episode.inserted_at) %>.
-            </p>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    </div>
-  </div>
+  <%= render(PartsView, "events_episodes.html",
+        events: @events, episodes: @episodes) %>
 </section>
 <% end %>

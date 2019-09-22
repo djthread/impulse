@@ -1,0 +1,10 @@
+<div class="columns">
+  <div class="column event-list">
+    <h2 class="title">Upcoming Events</h2>
+    <%= render("events.html", events: @events) %>
+  </div>
+  <div class="column episode-list">
+    <h2 class="title">Recent Episodes</h2>
+    <%= render("episodes.html", episodes: @episodes) %>
+  </div>
+</div>

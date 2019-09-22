@@ -27,11 +27,7 @@ defmodule ImpulseWeb.ShowLive do
         cond do
           Enum.any?(sections, fn {n, _, _} -> n == path_params["section"] end) ->
             {:noreply,
-             assign(socket,
-               show: show,
-               section: path_params["section"],
-               sections: sections
-             )}
+             assign(socket, get_assigns(path_params["section"], show, sections))}
 
           path_params["section"] ->
             {:stop,
@@ -40,8 +36,7 @@ defmodule ImpulseWeb.ShowLive do
              |> live_redirect(to: Routes.live_path(socket, ShowLive, show.slug))}
 
           true ->
-            {:noreply,
-             assign(socket, show: show, section: "home", sections: sections)}
+            {:noreply, assign(socket, get_assigns("home", show, sections))}
         end
     end
   end
@@ -54,6 +49,14 @@ defmodule ImpulseWeb.ShowLive do
       {"events", "Events",
        Routes.live_path(Endpoint, ShowLive, slug, "events")},
       {"info", "Info", Routes.live_path(Endpoint, ShowLive, slug, "info")}
+    ]
+  end
+
+  defp get_assigns("home", show, sections) do
+    [
+      show: show,
+      section: "home",
+      sections: sections
     ]
   end
 end

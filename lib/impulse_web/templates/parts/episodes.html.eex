@@ -1,0 +1,32 @@
+<%= for {episode, show_title, show_slug} <- @episodes do %>
+  <div class="box">
+    <div class="media-content">
+      <h3 class="title"><%= episode.title %></h3>
+      <div class="meta">
+        <div class="showname"><%= show_title %></div>
+      </div>
+    </div>
+    <div class="content">
+      <%= markdown(episode.description) %>
+
+      <div class="columns">
+        <div class="column buttons">
+          <span class="button is-fullwidth">
+            <%= fas("play-circle") %> Listen
+          </span>
+        </div>
+        <div class="column buttons">
+          <% dl = "/download/#{show_slug}/#{episode.filename}" %>
+          <a href="<%= dl %>" class="button is-fullwidth">
+            <%= fas("download") %> Download
+          </a>
+        </div>
+      </div>
+
+      <p>
+        Recorded on <%= date_format(episode.record_date) %>.
+        Posted on <%= date_format(episode.inserted_at) %>.
+      </p>
+    </div>
+  </div>
+<% end %>

@@ -9,7 +9,10 @@ $fa-font-path: "../node_modules/@fortawesome/fontawesome-free/webfonts";
 @import "../node_modules/@fortawesome/fontawesome-free/scss/solid";
 // @import "../node_modules/@fortawesome/fontawesome-free/scss/brands";
 
-@font-face { font-family: desonanz; src: url(/fonts/desonanz.ttf); }
+@font-face {
+  font-family: desonanz;
+  src: url(/fonts/desonanz.ttf);
+}
 
 section.hero div.hero-body {
   background-size: cover;
@@ -21,30 +24,54 @@ section.hero div.hero-body {
   background-image: url(https://photos.impulsedetroit.net/i/upload/2017/02/17/20170217190201-04823ba2-xl.jpg);
 }
 
-.idi { text-transform: lowercase; }
-.navbar-brand { font-family: desonanz; font-size: x-large; color: #f63; }
+.idi {
+  text-transform: lowercase;
+}
 
-.episode-list {
-  h3 { float: left; }
+.navbar-brand {
+  font-family: desonanz;
+  font-size: x-large;
+  color: #f63;
+}
 
-  .content { clear: both; }
+.episode-list,
+.event-list {
+  h3 {
+    float: left;
+  }
 
-  .showname {
+  .content {
+    clear: both;
+  }
+
+  .meta {
     text-align: right;
     padding: 0 .5rem;
     color: #ccc;
     font-size: 70%;
     line-height: 1.2em;
     float: right;
-  }
-  .showname p {
-    font-size: 120%;
-    font-weight: 700;
-    margin: 0;
+
+    .showname {
+      font-size: 120%;
+      font-weight: 700;
+      margin: 0;
+    }
   }
 
-  .columns:not(:last-child) { margin-bottom: 0; }
-  .buttons:not(:last-child) { margin-bottom: 0; }
-  .buttons .button { margin-bottom: 0; }
-  .button .icon { width: 2.5em; }
+  .columns:not(:last-child) {
+    margin-bottom: 0;
+  }
+
+  .buttons:not(:last-child) {
+    margin-bottom: 0;
+  }
+
+  .buttons .button {
+    margin-bottom: 0;
+  }
+
+  .button .icon {
+    width: 2.5em;
+  }
 }

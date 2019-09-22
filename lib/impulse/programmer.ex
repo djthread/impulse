@@ -4,6 +4,7 @@ defmodule Impulse.Programmer do
   """
   import Ecto.Query
   alias Impulse.{Episode, Event, Repo}
+  require Logger
 
   def episodes_and_events do
     episodes =
@@ -15,53 +16,66 @@ defmodule Impulse.Programmer do
           limit: 10
         )
       )
-      # |> IO.inspect()
 
-    {episodes, []}
-
-    # events =
-    #   Repo.all(
-    #     from(ev in Event,
-    #       order_by: [desc: ev.happens_on],
-    #       limit: 10
-    #     )
-    #   )
-
-    # {episodes, events}
     # |> IO.inspect()
+
+    events =
+      Repo.all(
+        from(ev in Event,
+          join: sh in assoc(ev, :show),
+          select: {ev, sh.name, sh.slug},
+          order_by: [desc: ev.happens_on],
+          limit: 10
+        )
+      )
+      |> Enum.map(fn data ->
+        og = elem(data, 0)
+
+        parsed =
+          case Jason.decode(og.info_json) do
+            {:ok, parsed} -> parsed
+            {:error, err} -> Logger.warn("Error parsing JSON: #{inspect(err)}")
+          end
+
+        data
+        |> Tuple.delete_at(0)
+        |> Tuple.insert_at(0, %{og | info_json: parsed})
+      end)
+
+    {episodes, events}
   end
 
-  def preload_a_month_of_episodes_and_events(shows) do
-    shows
-    |> Repo.preload(
-      episodes:
-        from(ep in Episode,
-          where: ep.record_date > ago(1, "month"),
-          order_by: [desc: ep.number]
-        )
-    )
-    |> Repo.preload(
-      events:
-        from(ev in Event,
-          where:
-            ev.happens_on > ago(2, "day") and
-              ev.happens_on < from_now(1, "month"),
-          order_by: ev.happens_on
-        )
-    )
-  end
+  # def preload_a_month_of_episodes_and_events(shows) do
+  #   shows
+  #   |> Repo.preload(
+  #     episodes:
+  #       from(ep in Episode,
+  #         where: ep.record_date > ago(1, "month"),
+  #         order_by: [desc: ep.number]
+  #       )
+  #   )
+  #   |> Repo.preload(
+  #     events:
+  #       from(ev in Event,
+  #         where:
+  #           ev.happens_on > ago(2, "day") and
+  #             ev.happens_on < from_now(1, "month"),
+  #         order_by: ev.happens_on
+  #       )
+  #   )
+  # end
 
-  def preload_episodes_and_events(show) do
-    show
-    |> Repo.preload(episodes: from(ep in Episode, order_by: [desc: ep.number]))
-    |> Repo.preload(
-      events:
-        from(ev in Event,
-          where: ev.happens_on > ago(2, "day"),
-          order_by: ev.happens_on
-        )
-    )
-  end
+  # def preload_episodes_and_events(show) do
+  #   show
+  #   |> Repo.preload(episodes: from(ep in Episode, order_by: [desc: ep.number]))
+  #   |> Repo.preload(
+  #     events:
+  #       from(ev in Event,
+  #         where: ev.happens_on > ago(2, "day"),
+  #         order_by: ev.happens_on
+  #       )
+  #   )
+  # end
 
   # iex(16)> u |> Tuesday.User.changeset(%{}) |> Ecto.Changeset.put_assoc(:shows, [s]) |> Tuesday.Repo.update!
   #

@@ -32,6 +32,7 @@ defmodule ImpulseWeb.ViewHelper do
 
         html_str
     end
+    |> raw()
   end
 
   def date_format(stamp) do

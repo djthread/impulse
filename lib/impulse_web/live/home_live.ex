@@ -1,7 +1,7 @@
 defmodule ImpulseWeb.HomeLive do
   @moduledoc "LiveView for the home page"
   use Phoenix.LiveView
-  alias Impulse.{Programmer, Repo, Show}
+  alias Impulse.Programmer
   alias ImpulseWeb.HomeView
 
   def render(assigns) do

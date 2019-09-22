@@ -7,7 +7,7 @@
   <div class="columns">
     <div class="column event-list">
       <h2 class="title">Upcoming Events</h2>
-      <%= for {event, show_title, show_slug} <- @events do %>
+      <%= for {event, show_title, _show_slug} <- @events do %>
         <div class="box">
           <div class="media-content">
             <h3 class="title"><%= event.title %></h3>
@@ -49,7 +49,7 @@
             </div>
           </div>
           <div class="content">
-            <%= raw markdown(episode.description) %>
+            <%= markdown(episode.description) %>
 
             <div class="columns">
               <div class="column buttons">

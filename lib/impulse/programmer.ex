@@ -3,8 +3,13 @@ defmodule Impulse.Programmer do
   Manages info about shows
   """
   import Ecto.Query
-  alias Impulse.{Episode, Event, Repo}
+  alias Impulse.{Episode, Event, Programmer, Repo, Show}
   require Logger
+
+  def shows do
+    enabled = Application.fetch_env!(:impulse, :shows_enabled)
+    Repo.all(from(sh in Show, where: sh.slug in ^enabled))
+  end
 
   def episodes_and_events do
     episodes =
@@ -16,8 +21,6 @@ defmodule Impulse.Programmer do
           limit: 10
         )
       )
-
-    # |> IO.inspect()
 
     events =
       Repo.all(

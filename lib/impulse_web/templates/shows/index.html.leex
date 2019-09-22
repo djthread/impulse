@@ -1,1 +1,12 @@
-oh, hey (this is the shows page)
+<%= render(
+  ImpulseWeb.LayoutView,
+  "accoutrements/breadcrumbs.html",
+  breadcrumbs: [
+    {"Shows", Routes.live_path(Endpoint, ShowsLive)}
+  ]) %>
+<div class="box">
+  <%= for show <- @shows do %>
+    <h2 class="title"><%= show.name %></h2>
+    <%= markdown(show.tiny_info) %>
+  <% end %>
+</div>

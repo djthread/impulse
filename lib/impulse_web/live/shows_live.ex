@@ -1,6 +1,7 @@
 defmodule ImpulseWeb.ShowsLive do
   @moduledoc "The LiveView for the shows listing"
   use Phoenix.LiveView
+  alias Impulse.Programmer
   alias ImpulseWeb.ShowsView
   # alias ImpulseWeb.Router.Helpers, as: Routes
 
@@ -9,7 +10,7 @@ defmodule ImpulseWeb.ShowsLive do
   end
 
   def mount(_params, socket) do
-    {:ok, socket}
+    {:ok, assign(socket, :shows, Programmer.shows())}
   end
 
   def handle_params(_params, _uri, socket) do

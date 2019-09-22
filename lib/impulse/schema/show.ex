@@ -1,7 +1,7 @@
 defmodule Impulse.Show do
   @moduledoc "Show schema"
   use Ecto.Schema
-  alias Impulse.{Episode, Event, Repo}
+  alias Impulse.{Episode, Event}
   import Ecto.Changeset
 
   @derive {Jason.Encoder,

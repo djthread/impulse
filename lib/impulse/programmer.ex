@@ -15,7 +15,7 @@ defmodule Impulse.Programmer do
           limit: 10
         )
       )
-      |> IO.inspect()
+      # |> IO.inspect()
 
     {episodes, []}
 

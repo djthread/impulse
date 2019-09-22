@@ -6,10 +6,10 @@
 
 $fa-font-path: "../node_modules/@fortawesome/fontawesome-free/webfonts";
 @import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
-// @import "../node_modules/@fortawesome/fontawesome-free/scss/solid";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/solid";
 // @import "../node_modules/@fortawesome/fontawesome-free/scss/brands";
 
-@font-face { font-family: desonanz; src: url(/ttf/desonanz.ttf); }
+@font-face { font-family: desonanz; src: url(/fonts/desonanz.ttf); }
 
 section.hero div.hero-body {
   background-size: cover;
@@ -43,5 +43,8 @@ section.hero div.hero-body {
     margin: 0;
   }
 
-  .button { width: 40%; }
+  .columns:not(:last-child) { margin-bottom: 0; }
+  .buttons:not(:last-child) { margin-bottom: 0; }
+  .buttons .button { margin-bottom: 0; }
+  .button .icon { width: 2.5em; }
 }

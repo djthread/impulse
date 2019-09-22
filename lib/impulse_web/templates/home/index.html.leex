@@ -25,9 +25,13 @@
             <div class="content">
               <%= raw markdown(episode.description) %>
 
-              <div class="buttons">
-                <span class="button"><%= fas("play-circle") %> Listen</span>
-                <span class="button">Download</span>
+              <div class="columns">
+              <div class="column buttons">
+                <span class="button is-fullwidth"><%= fas("play-circle") %> Listen</span>
+              </div>
+              <div class="column buttons">
+                <span class="button is-fullwidth"><%= fas("download") %> Download</span>
+              </div>
               </div>
 
               <p>

@@ -2,14 +2,18 @@ defmodule ImpulseWeb.ShowLive do
   @moduledoc "The LiveView for a show page"
   use Phoenix.LiveView
   alias Impulse.Programmer
-  alias ImpulseWeb.ShowView
-  # alias ImpulseWeb.Router.Helpers, as: Routes
+  alias ImpulseWeb.{HomeLive, ShowView}
+  alias ImpulseWeb.Router.Helpers, as: Routes
 
   def render(assigns) do
     ShowView.render("index.html", assigns)
   end
 
-  def mount(%{path_params: %{"slug" => slug}}, socket) do
+  def mount(_params, socket) do
+    {:ok, socket}
+  end
+
+  def handle_params(%{"slug" => slug} = path_params, _uri, socket) do
     case Programmer.show(slug) do
       nil ->
         {:stop,
@@ -18,11 +22,7 @@ defmodule ImpulseWeb.ShowLive do
          |> redirect(to: Routes.live_path(socket, HomeLive))}
 
       show ->
-        {:ok, assign(socket, :show, show)}
+        {:noreply, assign(socket, :show, show)}
     end
-  end
-
-  def handle_params(_params, _uri, socket) do
-    {:noreply, socket}
   end
 end

@@ -12,8 +12,4 @@ defmodule ImpulseWeb.ShowsLive do
   def mount(_params, socket) do
     {:ok, assign(socket, :shows, Programmer.shows())}
   end
-
-  def handle_params(_params, _uri, socket) do
-    {:noreply, socket}
-  end
 end

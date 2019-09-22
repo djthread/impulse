@@ -1,3 +1,4 @@
+<%= LayoutView.render_layout "normal.html", assigns do %>
 <%= render(
   ImpulseWeb.LayoutView,
   "accoutrements/breadcrumbs.html",
@@ -9,4 +10,5 @@
     <h2 class="title"><%= show.name %></h2>
     <%= markdown(show.tiny_info) %>
   <% end %>
+<% end %>
 <% end %>

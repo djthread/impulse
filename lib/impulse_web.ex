@@ -49,7 +49,7 @@ defmodule ImpulseWeb do
       import ImpulseWeb.Gettext
       import ImpulseWeb.ViewHelper
       alias ImpulseWeb.Router.Helpers, as: Routes
-      alias ImpulseWeb.{Endpoint, HomeLive, ShowLive, ShowsLive}
+      alias ImpulseWeb.{Endpoint, HomeLive, LayoutView, ShowLive, ShowsLive}
     end
   end
 

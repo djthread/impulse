@@ -1,11 +1,5 @@
-<%= render_layout "app.html", assigns do %>
-  <main role="main" class="container">
-    <div class="centered-column">
-      <p class="alert alert-info u-Mbm" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-    </div>
-    <div class="content">
-      <%= render @view_module, @view_template, assigns %>
-    </div>
-  </main>
-<% end %>
+<main role="main" class="container">
+  <div class="content">
+    <%= @content %>
+  </div>
+</main>

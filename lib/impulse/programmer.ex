@@ -8,18 +8,21 @@ defmodule Impulse.Programmer do
 
   def shows do
     enabled = Application.fetch_env!(:impulse, :shows_enabled)
-    Repo.all(from(sh in Show, where: sh.slug in ^enabled))
+    Repo.all(from sh in Show, where: sh.slug in ^enabled)
+  end
+
+  def show(slug) do
+    Repo.one(from sh in Show, where: sh.slug == ^slug)
   end
 
   def episodes_and_events do
     episodes =
       Repo.all(
-        from(ep in Episode,
+        from ep in Episode,
           join: sh in assoc(ep, :show),
           select: {ep, sh.name, sh.slug},
           order_by: [desc: ep.record_date],
           limit: 10
-        )
       )
 
     events =

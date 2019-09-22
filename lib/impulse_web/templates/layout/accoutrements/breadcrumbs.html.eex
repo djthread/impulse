@@ -1,18 +1,14 @@
 <nav class="breadcrumb" aria-label="breadcrumbs">
   <ul>
     <li><a href="/">Home</a></li>
-    <%= for {display, url} <- Enum.slice(@breadcrumbs, -1, length(@breadcrumbs) - 1) do %>
+    <%= for {display, url} <- Enum.slice(@breadcrumbs, 0, length(@breadcrumbs) - 1) do %>
       <li>
-        <a href="<%= url %>">
-          <%= display %>
-        </a>
+        <%= live_link display, to: url %>
       </li>
     <% end %>
     <% {display, url} = List.last(@breadcrumbs) %>
     <li class="is-active">
-      <a href="<%= url %>" aria-current="page">
-        <%= display %>
-      </a>
+      <%= live_link display, [{:to, url}, {"aria-current", "page"}] %>
     </li>
   </ul>
 </nav>

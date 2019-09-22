@@ -25,6 +25,7 @@ defmodule ImpulseWeb.Router do
     end
 
     live "/shows", ShowsLive
+    live "/shows/:slug", ShowLive
 
     live "/create", CreateUserLive
   end

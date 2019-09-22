@@ -1,0 +1,16 @@
+<%= render(
+  ImpulseWeb.LayoutView,
+  "accoutrements/breadcrumbs.html",
+  breadcrumbs: [
+    {"Shows", Routes.live_path(Endpoint, ShowsLive)},
+    {@show.name, Routes.live_path(Endpoint, ShowLive, @show.slug)}
+  ]) %>
+<div class="tabs">
+  <ul>
+    <li class="is-active"><a>Pictures</a></li>
+    <li><a>Music</a></li>
+    <li><a>Videos</a></li>
+    <li><a>Documents</a></li>
+  </ul>
+</div>
+<%= inspect @show %>

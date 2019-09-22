@@ -4,9 +4,9 @@
   breadcrumbs: [
     {"Shows", Routes.live_path(Endpoint, ShowsLive)}
   ]) %>
-<div class="box">
-  <%= for show <- @shows do %>
+<%= for show <- @shows do %>
+  <%= live_link to: Routes.live_path(Endpoint, ShowLive, show.slug), class: "box" do %>
     <h2 class="title"><%= show.name %></h2>
     <%= markdown(show.tiny_info) %>
   <% end %>
-</div>
+<% end %>

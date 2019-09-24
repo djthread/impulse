@@ -56,7 +56,9 @@ defmodule ImpulseWeb.ShowLive do
     [
       show: show,
       section: "home",
-      sections: sections
+      sections: sections,
+      events: Programmer.events(show_id: show.id),
+      episodes: Programmer.episodes(show_id: show.id),
     ]
   end
 end

@@ -15,40 +15,54 @@ defmodule Impulse.Programmer do
     Repo.one(from sh in Show, where: sh.slug == ^slug)
   end
 
-  def episodes_and_events do
-    episodes =
-      Repo.all(
-        from ep in Episode,
-          join: sh in assoc(ep, :show),
-          select: {ep, sh.name, sh.slug},
-          order_by: [desc: ep.record_date],
-          limit: 10
-      )
+  def episodes(opts \\ []) do
+    Repo.all(
+      from ep in Episode,
+        join: sh in assoc(ep, :show),
+        select: {ep, sh.name, sh.slug},
+        order_by: [desc: ep.record_date],
+        limit: 10
+    )
+  end
 
-    events =
-      Repo.all(
-        from(ev in Event,
-          join: sh in assoc(ev, :show),
-          select: {ev, sh.name, sh.slug},
-          order_by: [desc: ev.happens_on],
-          limit: 10
-        )
-      )
-      |> Enum.map(fn data ->
-        og = elem(data, 0)
+  def events(opts \\ []) do
+    from(ev in Event,
+      join: sh in assoc(ev, :show),
+      select: {ev, sh.name, sh.slug},
+      order_by: [desc: ev.happens_on],
+      limit: 10
+    )
+    |> query_only_show(Keyword.get(opts, :show_id))
+    |> Repo.all()
+    |> Enum.map(fn data ->
+      og = elem(data, 0)
 
-        parsed =
-          case Jason.decode(og.info_json) do
-            {:ok, parsed} -> parsed
-            {:error, err} -> Logger.warn("Error parsing JSON: #{inspect(err)}")
-          end
+      case expand_info_json(og) do
+        nil ->
+          data
 
-        data
-        |> Tuple.delete_at(0)
-        |> Tuple.insert_at(0, %{og | info_json: parsed})
-      end)
+        parsed ->
+          data
+          |> Tuple.delete_at(0)
+          |> Tuple.insert_at(0, %{og | info_json: parsed})
+      end
+    end)
+  end
 
-    {episodes, events}
+  defp query_only_show(query, nil), do: query
+
+  defp query_only_show(query, show_id),
+    do: from(q in query, where: q.show_id == ^show_id)
+
+  defp expand_info_json(event) do
+    case Jason.decode(event.info_json) do
+      {:ok, parsed} ->
+        parsed
+
+      {:error, err} ->
+        Logger.warn("Error parsing JSON: #{inspect(err)}")
+        nil
+    end
   end
 
   # def preload_a_month_of_episodes_and_events(shows) do

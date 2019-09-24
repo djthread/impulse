@@ -9,7 +9,9 @@ defmodule ImpulseWeb.HomeLive do
   end
 
   def mount(_params, socket) do
-    {episodes, events} = Programmer.episodes_and_events()
+    episodes = Programmer.episodes()
+    events = Programmer.events()
+
     {:ok, socket |> assign(episodes: episodes, events: events)}
   end
 

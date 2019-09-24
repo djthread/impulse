@@ -35,17 +35,12 @@ defmodule Impulse.Programmer do
     |> query_only_show(Keyword.get(opts, :show_id))
     |> Repo.all()
     |> Enum.map(fn data ->
-      og = elem(data, 0)
+      event = elem(data, 0)
+      info_json = Jason.decode!(event.info_json)
 
-      case expand_info_json(og) do
-        nil ->
-          data
-
-        parsed ->
-          data
-          |> Tuple.delete_at(0)
-          |> Tuple.insert_at(0, %{og | info_json: parsed})
-      end
+      data
+      |> Tuple.delete_at(0)
+      |> Tuple.insert_at(0, %{event | info_json: info_json})
     end)
   end
 
@@ -53,17 +48,6 @@ defmodule Impulse.Programmer do
 
   defp query_only_show(query, show_id),
     do: from(q in query, where: q.show_id == ^show_id)
-
-  defp expand_info_json(event) do
-    case Jason.decode(event.info_json) do
-      {:ok, parsed} ->
-        parsed
-
-      {:error, err} ->
-        Logger.warn("Error parsing JSON: #{inspect(err)}")
-        nil
-    end
-  end
 
   # def preload_a_month_of_episodes_and_events(shows) do
   #   shows
